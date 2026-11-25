@@ -53,6 +53,12 @@
     .hero .container {
       display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;
     }
+    .hero-photo {
+      width: 130px; height: 130px; border-radius: 50%;
+      object-fit: cover; border: 3px solid #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+      flex-shrink: 0;
+    }
     .hero-text h1 { font-size: 1.9rem; color: var(--blue); line-height: 1.25; }
     .hero-text .role { font-size: 1rem; color: var(--gray); margin-top: .35rem; }
     .hero-text .inst { font-size: .9rem; color: var(--gray); margin-top: .15rem; }
@@ -179,6 +185,9 @@
 <!-- ── Hero ─────────────────────────────────────────────────────────── -->
 <header class="hero">
   <div class="container">
+    <img class="hero-photo"
+         src="FullSizeRender.jpeg"
+         alt="Maurício Silva Louzeiro" />
     <div class="hero-text">
       <h1>Maurício Silva Louzeiro</h1>
       <p class="role">Assistant Professor · Mathematical Optimization</p>
