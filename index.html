@@ -1,465 +1,557 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Maurício S. Louzeiro — IME-UFG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <style>
-    /* ── Reset & base ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
+      --navy:   #0f2d5e;
       --blue:   #1a56a0;
-      --blue-l: #e8f0fb;
-      --gray:   #4a5568;
-      --light:  #f7f8fa;
-      --border: #dde3ec;
-      --text:   #1a202c;
-      --max:    860px;
+      --sky:    #3b82f6;
+      --teal:   #0d9488;
+      --light:  #f0f4f9;
+      --border: #dde5f0;
+      --text:   #1e293b;
+      --muted:  #64748b;
+      --white:  #ffffff;
     }
+
     html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      font-size: 16px; line-height: 1.65;
-      color: var(--text); background: #fff;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--white);
     }
+
     a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a:hover { color: var(--sky); }
 
-    /* ── Layout ───────────────────────────────────────────────────── */
-    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
-
-    /* ── Nav ──────────────────────────────────────────────────────── */
+    /* ── Nav ──────────────────────────────────────── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: var(--blue); color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,.18);
+      background: rgba(15, 45, 94, 0.97);
+      backdrop-filter: blur(8px);
     }
-    nav .container {
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 1rem;
-      padding-top: .75rem; padding-bottom: .75rem;
+    .nav-inner {
+      max-width: 980px; margin: 0 auto; padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
     }
-    nav .brand { font-weight: 700; font-size: 1rem; color: #fff; }
-    nav ul { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    nav ul a { color: rgba(255,255,255,.88); font-size: .9rem; }
-    nav ul a:hover { color: #fff; text-decoration: none; }
+    .nav-brand {
+      color: #fff; font-weight: 600; font-size: .95rem; letter-spacing: .01em;
+    }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75); font-size: .82rem;
+      font-weight: 500; letter-spacing: .03em; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: #fff; }
 
-    /* ── Hero ─────────────────────────────────────────────────────── */
+    /* ── Hero ─────────────────────────────────────── */
     .hero {
-      background: var(--blue-l);
-      border-bottom: 1px solid var(--border);
-      padding: 3rem 0 2.5rem;
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4080 60%, #1e5799 100%);
+      padding: 4rem 1.5rem 3.5rem;
     }
-    .hero .container {
-      display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;
+    .hero-inner {
+      max-width: 980px; margin: 0 auto;
+      display: flex; gap: 2.5rem; align-items: center;
+      flex-wrap: wrap;
     }
     .hero-photo {
-      width: 130px; height: 130px; border-radius: 50%;
-      object-fit: cover; border: 3px solid #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+      width: 148px; height: 148px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,255,255,.25);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
       flex-shrink: 0;
     }
-    .hero-text h1 { font-size: 1.9rem; color: var(--blue); line-height: 1.25; }
-    .hero-text .role { font-size: 1rem; color: var(--gray); margin-top: .35rem; }
-    .hero-text .inst { font-size: .9rem; color: var(--gray); margin-top: .15rem; }
-    .hero-links {
-      display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.1rem;
+    .hero-body { flex: 1; min-width: 260px; }
+    .hero-body h1 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 2.4rem; font-weight: 600;
+      color: #fff; line-height: 1.15;
+      letter-spacing: -.01em;
     }
-    .badge {
-      display: inline-flex; align-items: center; gap: .4rem;
-      background: var(--blue); color: #fff;
-      padding: .35rem .85rem; border-radius: 20px;
-      font-size: .82rem; font-weight: 600;
+    .hero-role {
+      margin-top: .5rem;
+      font-size: .95rem; color: rgba(255,255,255,.8); font-weight: 400;
+    }
+    .hero-inst {
+      margin-top: .2rem;
+      font-size: .85rem; color: rgba(255,255,255,.6);
+    }
+    .hero-badges {
+      display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.4rem;
+    }
+    .hbadge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .4rem 1rem;
+      border-radius: 24px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .02em;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .hbadge:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+    .hbadge-solid { background: rgba(255,255,255,.18); color: #fff; border: 1px solid rgba(255,255,255,.25); }
+    .hbadge-solid:hover { color: #fff; background: rgba(255,255,255,.26); }
+    .hbadge-outline { background: transparent; color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.35); }
+    .hbadge-outline:hover { color: #fff; border-color: rgba(255,255,255,.65); }
+
+    /* ── Sections ──────────────────────────────────── */
+    .section { padding: 3.5rem 1.5rem; }
+    .section + .section { border-top: 1px solid var(--border); }
+    .section-inner { max-width: 980px; margin: 0 auto; }
+
+    .section-title {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 1.6rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* ── Timeline (bio) ────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid; grid-template-columns: 100px 1fr;
+      gap: 0 1.5rem; position: relative;
+    }
+    .tl-year {
+      font-size: .78rem; font-weight: 700; color: var(--blue);
+      text-align: right; padding-top: .9rem;
+      letter-spacing: .04em;
+    }
+    .tl-body {
+      padding: .8rem 0 .8rem 1.5rem;
+      border-left: 2px solid var(--border);
+      position: relative;
+    }
+    .tl-body::before {
+      content: '';
+      position: absolute; left: -5px; top: 1.1rem;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue); border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+    .tl-title { font-weight: 600; font-size: .93rem; }
+    .tl-sub { font-size: .83rem; color: var(--muted); margin-top: .1rem; }
+
+    /* ── Research tags ──────────────────────────────── */
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .rtag {
+      background: var(--light); color: var(--navy);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: .3rem .8rem; font-size: .82rem; font-weight: 500;
+    }
+
+    /* ── Publications ───────────────────────────────── */
+    .pub-year-group { margin-bottom: 2.25rem; }
+    .pub-year-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: .9rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .pub-year-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .pub-card {
+      display: flex; gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: box-shadow .2s, border-color .2s;
+      margin-bottom: .7rem;
+    }
+    .pub-card:hover {
+      box-shadow: 0 4px 16px rgba(15,45,94,.08);
+      border-color: #bcd0ea;
+    }
+    .pub-card-body { flex: 1; }
+    .pub-title { font-weight: 600; font-size: .93rem; line-height: 1.4; color: var(--text); }
+    .pub-authors { font-size: .82rem; color: var(--muted); margin-top: .25rem; }
+    .pub-venue {
+      font-size: .82rem; color: var(--teal); margin-top: .25rem;
+      font-style: italic;
+    }
+    .pub-links { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .6rem; }
+    .pub-doi {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700; letter-spacing: .04em;
+      background: var(--navy); color: #fff;
+      padding: .2rem .6rem; border-radius: 4px;
       transition: background .15s;
     }
-    .badge:hover { background: #174891; text-decoration: none; }
-    .badge.outline {
-      background: #fff; color: var(--blue);
-      border: 1.5px solid var(--blue);
-    }
-    .badge.outline:hover { background: var(--blue-l); }
-
-    /* ── Sections ─────────────────────────────────────────────────── */
-    section { padding: 3rem 0; }
-    section + section { border-top: 1px solid var(--border); }
-    h2 {
-      font-size: 1.3rem; color: var(--blue);
-      margin-bottom: 1.25rem; padding-bottom: .4rem;
-      border-bottom: 2px solid var(--blue-l);
+    .pub-doi:hover { background: var(--blue); color: #fff; }
+    .pub-pdf {
       display: inline-block;
+      font-size: .72rem; font-weight: 700; letter-spacing: .04em;
+      background: var(--teal); color: #fff;
+      padding: .2rem .6rem; border-radius: 4px;
+      transition: background .15s;
     }
+    .pub-pdf:hover { background: #0a7a70; color: #fff; }
 
-    /* ── Bio ──────────────────────────────────────────────────────── */
-    .bio-grid {
-      display: grid; gap: .6rem;
-      grid-template-columns: max-content 1fr;
+    /* ── Students ────────────────────────────────────── */
+    .students-grid { display: flex; flex-direction: column; gap: .7rem; }
+    .student-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: .85rem 1.1rem;
+      background: var(--light); border: 1px solid var(--border); border-radius: 10px;
     }
-    .bio-grid dt { font-weight: 600; color: var(--gray); padding-right: 1rem; }
-    .bio-grid dd { color: var(--text); }
+    .student-badge {
+      font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      padding: .2rem .6rem; border-radius: 20px; flex-shrink: 0;
+    }
+    .badge-ongoing { background: #dbeafe; color: #1d4ed8; }
+    .badge-done { background: #d1fae5; color: #065f46; }
+    .student-name { font-weight: 600; font-size: .9rem; }
+    .student-meta { font-size: .78rem; color: var(--muted); margin-top: .05rem; }
 
-    /* ── Research interests ───────────────────────────────────────── */
-    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .25rem; }
-    .tag {
-      background: var(--blue-l); color: var(--blue);
-      border: 1px solid #c3d6f0; border-radius: 20px;
-      padding: .25rem .75rem; font-size: .85rem;
-    }
-
-    /* ── Publications ─────────────────────────────────────────────── */
-    .pub-list { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
-    .pub-list li {
-      background: var(--light); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1rem 1.15rem;
-    }
-    .pub-title { font-weight: 600; font-size: .97rem; }
-    .pub-authors { color: var(--gray); font-size: .88rem; margin-top: .2rem; }
-    .pub-venue {
-      font-size: .88rem; margin-top: .25rem;
-      color: #2d6a4f; font-style: italic;
-    }
-    .pub-links { margin-top: .45rem; display: flex; gap: .6rem; flex-wrap: wrap; }
-    .pub-link {
-      font-size: .78rem; font-weight: 600;
-      background: var(--blue); color: #fff;
-      padding: .15rem .6rem; border-radius: 4px;
-    }
-    .pub-link:hover { background: #174891; text-decoration: none; }
-    .pub-year-sep {
-      font-weight: 700; color: var(--blue);
-      font-size: .8rem; letter-spacing: .05em;
-      text-transform: uppercase; margin-top: .5rem;
-    }
-
-    /* ── Teaching ─────────────────────────────────────────────────── */
-    .course-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-    .course-list li {
-      display: flex; align-items: center; gap: .75rem;
-      padding: .6rem .9rem;
-      background: var(--light); border: 1px solid var(--border);
-      border-radius: 6px; font-size: .95rem;
-    }
-    .course-list li::before {
-      content: "▸"; color: var(--blue); font-size: .8rem; flex-shrink: 0;
-    }
-
-    /* ── Contact ──────────────────────────────────────────────────── */
+    /* ── Contact ─────────────────────────────────────── */
     .contact-grid {
-      display: grid; gap: .7rem;
-      grid-template-columns: max-content 1fr;
-      align-items: center;
+      display: grid; gap: .9rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
-    .contact-grid dt { font-weight: 600; color: var(--gray); padding-right: 1rem; }
+    .contact-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: .9rem 1.1rem;
+      background: var(--light); border: 1px solid var(--border); border-radius: 10px;
+    }
+    .contact-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-label { font-size: .72rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .contact-val { font-size: .88rem; font-weight: 500; color: var(--text); margin-top: .05rem; }
+    .contact-val a { color: var(--blue); }
+    .contact-val a:hover { color: var(--sky); }
 
-    /* ── Footer ───────────────────────────────────────────────────── */
+    /* ── Footer ──────────────────────────────────────── */
     footer {
-      background: var(--light); border-top: 1px solid var(--border);
-      padding: 1.25rem 0; text-align: center;
-      font-size: .82rem; color: var(--gray);
+      background: var(--navy); color: rgba(255,255,255,.5);
+      text-align: center; padding: 1.5rem;
+      font-size: .8rem;
     }
 
-    /* ── Responsive ───────────────────────────────────────────────── */
+    /* ── Responsive ───────────────────────────────────── */
     @media (max-width: 600px) {
-      nav .container { flex-direction: column; align-items: flex-start; }
-      .hero-text h1 { font-size: 1.5rem; }
-      .bio-grid, .contact-grid { grid-template-columns: 1fr; }
-      .bio-grid dt, .contact-grid dt { margin-top: .4rem; }
+      .hero-body h1 { font-size: 1.8rem; }
+      .tl-item { grid-template-columns: 70px 1fr; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Nav ──────────────────────────────────────────────────────────── -->
 <nav>
-  <div class="container">
-    <span class="brand">M. S. Louzeiro</span>
-    <ul>
-      <li><a href="#bio">Biography</a></li>
+  <div class="nav-inner">
+    <span class="nav-brand">M. S. Louzeiro</span>
+    <ul class="nav-links">
+      <li><a href="#bio">Bio</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
-      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#students">Students</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ── Hero ─────────────────────────────────────────────────────────── -->
 <header class="hero">
-  <div class="container">
-    <img class="hero-photo"
-         src="FullSizeRender.jpeg"
-         alt="Maurício Silva Louzeiro" />
-    <div class="hero-text">
+  <div class="hero-inner">
+    <img class="hero-photo" src="FullSizeRender.jpeg" alt="Maurício Silva Louzeiro"/>
+    <div class="hero-body">
       <h1>Maurício Silva Louzeiro</h1>
-      <p class="role">Adjoint Professor · Mathematical Optimization</p>
-      <p class="inst">Instituto de Matemática e Estatística — Universidade Federal de Goiás (IME-UFG)</p>
-      <div class="hero-links">
-        <a class="badge" href="https://github.com/mauriciolouzeiro" target="_blank">
-          ⌥ GitHub
-        </a>
-        <a class="badge outline" href="http://lattes.cnpq.br/3049272965306538" target="_blank">
-          Lattes
-        </a>
-        <a class="badge outline" href="https://www.researchgate.net/profile/Mauricio-Louzeiro" target="_blank">
-          ResearchGate
-        </a>
-        <a class="badge outline" href="https://ime.ufg.br/" target="_blank">
-          IME-UFG
-        </a>
+      <p class="hero-role">Professor · Mathematical Optimization</p>
+      <p class="hero-inst">Instituto de Matemática e Estatística — Universidade Federal de Goiás (IME-UFG)</p>
+      <div class="hero-badges">
+        <a class="hbadge hbadge-solid" href="https://github.com/mauriciolouzeiro" target="_blank">GitHub</a>
+        <a class="hbadge hbadge-outline" href="http://lattes.cnpq.br/3049272965306538" target="_blank">Lattes CV</a>
+        <a class="hbadge hbadge-outline" href="https://www.researchgate.net/profile/Mauricio-Louzeiro" target="_blank">ResearchGate</a>
+        <a class="hbadge hbadge-outline" href="https://scholar.google.com/citations?user=6rZauzYAAAAJ" target="_blank">Google Scholar</a>
+        <a class="hbadge hbadge-outline" href="https://orcid.org/0000-0002-4755-3505" target="_blank">ORCID</a>
+        <a class="hbadge hbadge-solid" href="https://optimization-ufg.github.io/" target="_blank">Optimization Group</a>
       </div>
     </div>
   </div>
 </header>
 
-<!-- ── Biography ────────────────────────────────────────────────────── -->
-<section id="bio">
-  <div class="container">
-    <h2>Biography</h2>
-    <dl class="bio-grid">
-      <dt>Position</dt>
-      <dd>Assistant Professor, IME-UFG, Goiânia, GO, Brazil</dd>
-
-      <dt>Address</dt>
-      <dd>Campus II, 74690-900, Goiânia, GO, Brasil</dd>
-
-      <dt>B.Sc.</dt>
-      <dd>Mathematics, UFG, 2013</dd>
-
-      <dt>M.Sc.</dt>
-      <dd>Mathematics, UFG, 2016</dd>
-
-      <dt>Ph.D.</dt>
-      <dd>Mathematics, UFG, 2019<br>
-        <small>Advisors: Orizon P. Ferreira &amp; Leandro F. Prudente</small>
-      </dd>
-
-      <dt>Postdoc</dt>
-      <dd>TU Chemnitz, Germany (2019–2021)</dd>
-
-      <dt>Postdoc</dt>
-      <dd>Dongguan University of Technology, China (2021–2023)</dd>
-    </dl>
-  </div>
-</section>
-
-<!-- ── Research ─────────────────────────────────────────────────────── -->
-<section id="research">
-  <div class="container">
-    <h2>Research Interests</h2>
-    <div class="tags">
-      <span class="tag">Mathematical Optimization</span>
-      <span class="tag">Riemannian &amp; Hadamard Manifolds</span>
-      <span class="tag">Semidefinite Programming</span>
-      <span class="tag">Proximal Methods</span>
-      <span class="tag">Gradient &amp; Subgradient Methods</span>
-      <span class="tag">Fenchel Duality</span>
-      <span class="tag">Inexact Newton Methods</span>
-      <span class="tag">Numerical Analysis</span>
+<section class="section" id="bio">
+  <div class="section-inner">
+    <h2 class="section-title">Biography</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2023–</div>
+        <div class="tl-body">
+          <div class="tl-title">Professor</div>
+          <div class="tl-sub">IME-UFG, Goiânia, Brazil</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2021–2023</div>
+        <div class="tl-body">
+          <div class="tl-title">Postdoctoral Researcher</div>
+          <div class="tl-sub">Dongguan University of Technology, China · Supervisor: Jinyun Yuan</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2019–2021</div>
+        <div class="tl-body">
+          <div class="tl-title">Postdoctoral Researcher</div>
+          <div class="tl-sub">TU Chemnitz, Germany · Supervisor: Roland Herzog</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2019</div>
+        <div class="tl-body">
+          <div class="tl-title">Ph.D. in Mathematics</div>
+          <div class="tl-sub">Universidade Federal de Goiás · Advisors: Orizon P. Ferreira &amp; Leandro F. Prudente</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2016</div>
+        <div class="tl-body">
+          <div class="tl-title">M.Sc. in Mathematics</div>
+          <div class="tl-sub">Universidade Federal de Goiás</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2013</div>
+        <div class="tl-body">
+          <div class="tl-title">B.Sc. in Mathematics</div>
+          <div class="tl-sub">Universidade Federal de Goiás</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── Publications ─────────────────────────────────────────────────── -->
-<section id="publications">
-  <div class="container">
-    <h2>Publications</h2>
-
-    <p class="pub-year-sep">2026</p>
-    <ul class="pub-list">
-
-      <li>
-        <p class="pub-title">A scalable sequential adaptive cubic regularization algorithm for optimization with general equality constraints</p>
-        <p class="pub-authors">Yonggang Pei, Yubing Lin, Shuai Shao, <strong>Maurício S. Louzeiro</strong>, Detong Zhu</p>
-        <p class="pub-venue">Numerical Algorithms, v. 1, p. 1, 2026</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1007/s11075-026-02401-z" target="_blank">DOI</a>
-        </div>
-      </li>
-
-      <li>
-        <p class="pub-title">Busemann Hybrid Projection-Proximal Point Algorithm for Optimization Problems on Hadamard Manifolds</p>
-        <p class="pub-authors">R. Díaz Millán, O. P. Ferreira, <strong>Maurício S. Louzeiro</strong>, J. A. Ugon</p>
-        <p class="pub-venue">Applied Mathematics and Optimization, v. 94, p. 31, 2026</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1007/s00245-026-10477-1" target="_blank">DOI</a>
-        </div>
-      </li>
-
-    </ul>
-
-    <p class="pub-year-sep" style="margin-top:1.5rem">2025</p>
-    <ul class="pub-list">
-
-      <li>
-        <p class="pub-title">An Adaptive Cubic Regularization Inexact-Newton Method on Riemannian Manifolds</p>
-        <p class="pub-authors"><strong>Maurício S. Louzeiro</strong>, Gilson N. Silva, Jinyun Yuan, Daoping Zhang</p>
-        <p class="pub-venue">Journal of Scientific Computing, v. 105, p. 69, 2025</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1007/s10915-025-03099-2" target="_blank">DOI</a>
-        </div>
-      </li>
-
-      <li>
-        <p class="pub-title">Inexact Newton Methods for Solving Generalized Equations on Riemannian Manifolds</p>
-        <p class="pub-authors"><strong>Maurício S. Louzeiro</strong>, Gilson N. Silva, Jinyun Yuan, Daoping Zhang</p>
-        <p class="pub-venue">Journal of Scientific Computing, v. 103, p. 67, 2025</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1007/s10915-025-02894-1" target="_blank">DOI</a>
-        </div>
-      </li>
-
-    </ul>
-
-    <p class="pub-year-sep" style="margin-top:1.5rem">2022</p>
-    <ul class="pub-list">
-
-      <li>
-        <p class="pub-title">Fenchel Duality and a Separation Theorem on Hadamard Manifolds</p>
-        <p class="pub-authors"><strong>Maurício Silva Louzeiro</strong>, Ronny Bergmann, Roland Herzog</p>
-        <p class="pub-venue">SIAM Journal on Optimization, v. 32, p. 854–873, 2022</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1137/21M1400699" target="_blank">DOI</a>
-        </div>
-      </li>
-
-      <li>
-        <p class="pub-title">A Projected Subgradient Method for the Computation of Adapted Metrics for Dynamical Systems</p>
-        <p class="pub-authors">Maurício Louzeiro, Christoph Kawan, Sigurdur Hafstein, Peter Giesl, Jinyun Yuan</p>
-        <p class="pub-venue">SIAM Journal on Applied Dynamical Systems, v. 21, p. 2610–2641, 2022</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1137/22M1475776" target="_blank">DOI</a>
-        </div>
-      </li>
-
-    </ul>
-
-    <p class="pub-year-sep" style="margin-top:1.5rem">2021</p>
-    <ul class="pub-list">
-
-      <li>
-        <p class="pub-title">Fenchel Duality Theory and a Primal-Dual Algorithm on Riemannian Manifolds</p>
-        <p class="pub-authors">Ronny Bergmann, Roland Herzog, <strong>Maurício Silva Louzeiro</strong>, Daniel Tenbrinck, José Vidal-Núñez</p>
-        <p class="pub-venue">Foundations of Computational Mathematics, v. 21, p. 1465–1504, 2021</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1007/s10208-020-09486-5" target="_blank">DOI</a>
-          <a class="pub-link" href="https://link.springer.com/content/pdf/10.1007/s10208-020-09486-5.pdf" target="_blank">PDF</a>
-        </div>
-      </li>
-
-    </ul>
-
-    <p class="pub-year-sep" style="margin-top:1.5rem">2019</p>
-    <ul class="pub-list">
-
-      <li>
-        <p class="pub-title">Iteration-complexity of the subgradient method on Riemannian manifolds with lower bounded curvature</p>
-        <p class="pub-authors">O. P. Ferreira, <strong>M. S. Louzeiro</strong>, L. F. Prudente</p>
-        <p class="pub-venue">Optimization, v. 68, p. 713–729, 2019</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1080/02331934.2018.1542532" target="_blank">DOI</a>
-        </div>
-      </li>
-
-      <li>
-        <p class="pub-title">Gradient Method for Optimization on Riemannian Manifolds with Lower Bounded Curvature</p>
-        <p class="pub-authors">O. P. Ferreira, <strong>M. S. Louzeiro</strong>, L. F. Prudente</p>
-        <p class="pub-venue">SIAM Journal on Optimization, v. 29, p. 2517–2541, 2019</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1137/18M1180633" target="_blank">DOI</a>
-        </div>
-      </li>
-
-      <li>
-        <p class="pub-title">Iteration-Complexity and Asymptotic Analysis of Steepest Descent Method for Multiobjective Optimization on Riemannian Manifolds</p>
-        <p class="pub-authors">Orizon P. Ferreira, <strong>Maurício S. Louzeiro</strong>, Leandro F. Prudente</p>
-        <p class="pub-venue">Journal of Optimization Theory and Applications, v. 184, p. 507–533, 2019</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1007/s10957-019-01615-7" target="_blank">DOI</a>
-        </div>
-      </li>
-
-    </ul>
-
-    <p class="pub-year-sep" style="margin-top:1.5rem">Book Chapter</p>
-    <ul class="pub-list">
-      <li>
-        <p class="pub-title">First Order Methods for Optimization on Riemannian Manifolds</p>
-        <p class="pub-authors">Orizon P. Ferreira, <strong>Maurício S. Louzeiro</strong>, Leandro F. Prudente</p>
-        <p class="pub-venue">Handbook of Variational Methods for Nonlinear Geometric Data, Springer, 2020, p. 499–525</p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://doi.org/10.1007/978-3-030-31351-7_18" target="_blank">DOI</a>
-        </div>
-      </li>
-    </ul>
-
-    <p class="pub-year-sep" style="margin-top:1.5rem">Theses</p>
-    <ul class="pub-list">
-      <li>
-        <p class="pub-title">Optimization methods on Riemannian manifolds with lower bounded curvature: gradient for scalar and multi-objective functions and subgradient for scalar functions</p>
-        <p class="pub-authors"><strong>Mauricio Silva Louzeiro</strong> — Ph.D. Thesis, UFG, 2019<br>
-          <small>Advisors: Orizon P. Ferreira &amp; Leandro F. Prudente</small>
-        </p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://repositorio.bc.ufg.br/tede/items/a90167e8-ba70-4349-9809-dd7bfedfc78f" target="_blank">Repository</a>
-        </div>
-      </li>
-      <li>
-        <p class="pub-title">Método de Newton para encontrar zeros de uma classe especial de funções semi-suaves</p>
-        <p class="pub-authors"><strong>Mauricio Silva Louzeiro</strong> — M.Sc. Dissertation, UFG, 2016<br>
-          <small>Advisor: Orizon P. Ferreira</small>
-        </p>
-        <div class="pub-links">
-          <a class="pub-link" href="https://files.cercomp.ufg.br/weby/up/328/o/Diss_Mauricio04Fev2016.pdf" target="_blank">PDF</a>
-        </div>
-      </li>
-    </ul>
-
+<section class="section" id="research">
+  <div class="section-inner">
+    <h2 class="section-title">Research Interests</h2>
+    <div class="tag-cloud">
+      <span class="rtag">Mathematical Optimization</span>
+      <span class="rtag">Riemannian &amp; Hadamard Manifolds</span>
+      <span class="rtag">Semidefinite Programming</span>
+      <span class="rtag">Proximal Methods</span>
+      <span class="rtag">Gradient &amp; Subgradient Methods</span>
+      <span class="rtag">Fenchel Duality</span>
+      <span class="rtag">Inexact Newton Methods</span>
+      <span class="rtag">Numerical Analysis</span>
+    </div>
   </div>
 </section>
 
-<!-- ── Teaching ──────────────────────────────────────────────────────── -->
-<section id="teaching">
-  <div class="container">
-    <h2>Teaching</h2>
-    <p style="color:var(--gray);font-size:.9rem;margin-bottom:.9rem">
-      IME-UFG · Undergraduate courses
-    </p>
-    <ul class="course-list">
-      <li>Álgebra Linear (Linear Algebra)</li>
-      <li>Cálculo 1A (Calculus 1A)</li>
-      <li>Cálculo Numérico (Numerical Calculus) — Engenharia da Computação</li>
-    </ul>
+<section class="section" id="publications">
+  <div class="section-inner">
+    <h2 class="section-title">Publications</h2>
+
+    <div class="pub-year-group">
+      <div class="pub-year-label">2026</div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">A scalable sequential adaptive cubic regularization algorithm for optimization with general equality constraints</div>
+        <div class="pub-authors">Y. Pei, Y. Lin, S. Shao, <strong>M. S. Louzeiro</strong>, D. Zhu</div>
+        <div class="pub-venue">Numerical Algorithms, 2026</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1007/s11075-026-02401-z" target="_blank">DOI</a></div>
+      </div></div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Busemann Hybrid Projection-Proximal Point Algorithm for Optimization Problems on Hadamard Manifolds</div>
+        <div class="pub-authors">R. Díaz Millán, O. P. Ferreira, <strong>M. S. Louzeiro</strong>, J. A. Ugon</div>
+        <div class="pub-venue">Applied Mathematics and Optimization, v. 94, p. 31, 2026</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1007/s00245-026-10477-1" target="_blank">DOI</a></div>
+      </div></div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year-label">2025</div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">An Adaptive Cubic Regularization Inexact-Newton Method on Riemannian Manifolds</div>
+        <div class="pub-authors"><strong>M. S. Louzeiro</strong>, G. N. Silva, J. Yuan, D. Zhang</div>
+        <div class="pub-venue">Journal of Scientific Computing, v. 105, p. 69, 2025</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1007/s10915-025-03099-2" target="_blank">DOI</a></div>
+      </div></div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Inexact Newton Methods for Solving Generalized Equations on Riemannian Manifolds</div>
+        <div class="pub-authors"><strong>M. S. Louzeiro</strong>, G. N. Silva, J. Yuan, D. Zhang</div>
+        <div class="pub-venue">Journal of Scientific Computing, v. 103, p. 67, 2025</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1007/s10915-025-02894-1" target="_blank">DOI</a></div>
+      </div></div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year-label">2022</div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Fenchel Duality and a Separation Theorem on Hadamard Manifolds</div>
+        <div class="pub-authors"><strong>M. S. Louzeiro</strong>, R. Bergmann, R. Herzog</div>
+        <div class="pub-venue">SIAM Journal on Optimization, v. 32, p. 854–873, 2022</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1137/21M1400699" target="_blank">DOI</a></div>
+      </div></div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">A Projected Subgradient Method for the Computation of Adapted Metrics for Dynamical Systems</div>
+        <div class="pub-authors">M. Louzeiro, C. Kawan, S. Hafstein, P. Giesl, J. Yuan</div>
+        <div class="pub-venue">SIAM Journal on Applied Dynamical Systems, v. 21, p. 2610–2641, 2022</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1137/22M1475776" target="_blank">DOI</a></div>
+      </div></div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year-label">2021</div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Fenchel Duality Theory and a Primal-Dual Algorithm on Riemannian Manifolds</div>
+        <div class="pub-authors">R. Bergmann, R. Herzog, <strong>M. S. Louzeiro</strong>, D. Tenbrinck, J. Vidal-Núñez</div>
+        <div class="pub-venue">Foundations of Computational Mathematics, v. 21, p. 1465–1504, 2021</div>
+        <div class="pub-links">
+          <a class="pub-doi" href="https://doi.org/10.1007/s10208-020-09486-5" target="_blank">DOI</a>
+          <a class="pub-pdf" href="https://link.springer.com/content/pdf/10.1007/s10208-020-09486-5.pdf" target="_blank">PDF</a>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year-label">2019</div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Gradient Method for Optimization on Riemannian Manifolds with Lower Bounded Curvature</div>
+        <div class="pub-authors">O. P. Ferreira, <strong>M. S. Louzeiro</strong>, L. F. Prudente</div>
+        <div class="pub-venue">SIAM Journal on Optimization, v. 29, p. 2517–2541, 2019</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1137/18M1180633" target="_blank">DOI</a></div>
+      </div></div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Iteration-complexity of the subgradient method on Riemannian manifolds with lower bounded curvature</div>
+        <div class="pub-authors">O. P. Ferreira, <strong>M. S. Louzeiro</strong>, L. F. Prudente</div>
+        <div class="pub-venue">Optimization, v. 68, p. 713–729, 2019</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1080/02331934.2018.1542532" target="_blank">DOI</a></div>
+      </div></div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Iteration-Complexity and Asymptotic Analysis of Steepest Descent Method for Multiobjective Optimization on Riemannian Manifolds</div>
+        <div class="pub-authors">O. P. Ferreira, <strong>M. S. Louzeiro</strong>, L. F. Prudente</div>
+        <div class="pub-venue">Journal of Optimization Theory and Applications, v. 184, p. 507–533, 2019</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1007/s10957-019-01615-7" target="_blank">DOI</a></div>
+      </div></div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year-label">Book Chapter</div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">First Order Methods for Optimization on Riemannian Manifolds</div>
+        <div class="pub-authors">O. P. Ferreira, <strong>M. S. Louzeiro</strong>, L. F. Prudente</div>
+        <div class="pub-venue">Handbook of Variational Methods for Nonlinear Geometric Data, Springer, 2020, p. 499–525</div>
+        <div class="pub-links"><a class="pub-doi" href="https://doi.org/10.1007/978-3-030-31351-7_18" target="_blank">DOI</a></div>
+      </div></div>
+    </div>
+
+    <div class="pub-year-group">
+      <div class="pub-year-label">Theses</div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Optimization methods on Riemannian manifolds with lower bounded curvature <span style="font-weight:400;font-style:italic">(Ph.D. Thesis)</span></div>
+        <div class="pub-authors">UFG, 2019 · Advisors: Orizon P. Ferreira &amp; Leandro F. Prudente</div>
+        <div class="pub-links"><a class="pub-doi" href="https://repositorio.bc.ufg.br/tede/items/a90167e8-ba70-4349-9809-dd7bfedfc78f" target="_blank">Repository</a></div>
+      </div></div>
+      <div class="pub-card"><div class="pub-card-body">
+        <div class="pub-title">Método de Newton para zeros de funções semi-suaves <span style="font-weight:400;font-style:italic">(M.Sc. Dissertation)</span></div>
+        <div class="pub-authors">UFG, 2016 · Advisor: Orizon P. Ferreira</div>
+        <div class="pub-links"><a class="pub-doi" href="https://files.cercomp.ufg.br/weby/up/328/o/Diss_Mauricio04Fev2016.pdf" target="_blank">PDF</a></div>
+      </div></div>
+    </div>
   </div>
 </section>
 
-<!-- ── Contact ───────────────────────────────────────────────────────── -->
-<section id="contact">
-  <div class="container">
-    <h2>Contact</h2>
-    <dl class="contact-grid">
-      <dt>E-mail</dt>
-      <dd><a href="mailto:mauriciolouzeiro@ufg.br">mauriciolouzeiro@ufg.br</a></dd>
-
-      <dt>GitHub</dt>
-      <dd><a href="https://github.com/mauriciolouzeiro" target="_blank">github.com/mauriciolouzeiro</a></dd>
-
-      <dt>Lattes</dt>
-      <dd><a href="http://lattes.cnpq.br/3049272965306538" target="_blank">lattes.cnpq.br/3049272965306538</a></dd>
-
-      <dt>ResearchGate</dt>
-      <dd><a href="https://www.researchgate.net/profile/Mauricio-Louzeiro" target="_blank">researchgate.net/profile/Mauricio-Louzeiro</a></dd>
-
-      <dt>Institution</dt>
-      <dd>
-        Instituto de Matemática e Estatística<br>
-        Universidade Federal de Goiás — Campus II<br>
-        74690-900, Goiânia, GO, Brasil<br>
-        <a href="https://ime.ufg.br/" target="_blank">ime.ufg.br</a>
-      </dd>
-    </dl>
+<section class="section" id="students">
+  <div class="section-inner">
+    <h2 class="section-title">Students</h2>
+    <div class="students-grid">
+      <div class="student-card">
+        <span class="student-badge badge-ongoing">Ph.D. · ongoing</span>
+        <div>
+          <div class="student-name"><a href="http://lattes.cnpq.br/3207246500254778" target="_blank">Alejandra Muñoz González</a></div>
+          <div class="student-meta">Since 2025</div>
+        </div>
+      </div>
+      <div class="student-card">
+        <span class="student-badge badge-done">Undergrad research · concluded</span>
+        <div>
+          <div class="student-name">João Victor Borges Bastos</div>
+          <div class="student-meta">2025 / 2026</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ── Footer ───────────────────────────────────────────────────────── -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val"><a href="mailto:mauriciolouzeiro@ufg.br">mauriciolouzeiro@ufg.br</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">⌥</div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-val"><a href="https://github.com/mauriciolouzeiro" target="_blank">github.com/mauriciolouzeiro</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📋</div>
+        <div>
+          <div class="contact-label">Lattes CV</div>
+          <div class="contact-val"><a href="http://lattes.cnpq.br/3049272965306538" target="_blank">lattes.cnpq.br/3049272965306538</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">R</div>
+        <div>
+          <div class="contact-label">ResearchGate</div>
+          <div class="contact-val"><a href="https://www.researchgate.net/profile/Mauricio-Louzeiro" target="_blank">researchgate.net/…/Mauricio-Louzeiro</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">S</div>
+        <div>
+          <div class="contact-label">Google Scholar</div>
+          <div class="contact-val"><a href="https://scholar.google.com/citations?user=6rZauzYAAAAJ" target="_blank">scholar.google.com</a></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">iD</div>
+        <div>
+          <div class="contact-label">ORCID</div>
+          <div class="contact-val"><a href="https://orcid.org/0000-0002-4755-3505" target="_blank">0000-0002-4755-3505</a></div>
+        </div>
+      </div>
+      <div class="contact-card" style="grid-column: 1/-1">
+        <div class="contact-icon">🏛</div>
+        <div>
+          <div class="contact-label">Institution</div>
+          <div class="contact-val">
+            Instituto de Matemática e Estatística · Universidade Federal de Goiás<br>
+            Campus II · 74690-900, Goiânia, GO, Brasil
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <p>Maurício Silva Louzeiro · IME-UFG · Goiânia, Brazil</p>
 </footer>
